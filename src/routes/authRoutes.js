@@ -9,7 +9,7 @@ const {
     updatePassword,
     deactivate,
     activate,
-    logout
+    logout,
 } = require('../controllers/authController');
 
 const authRoutes = express.Router();

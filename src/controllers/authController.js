@@ -106,7 +106,9 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     }
     const resetToken = user.createResetToken();
     await user.save({ validateBeforeSave: false });
-    const resetURL = `${req.protocol}://${req.get('host')}/api/v1/auth/reset-password/${resetToken}`;
+    const resetURL = `${req.protocol}://${req.get(
+        'host'
+    )}/api/v1/auth/reset-password/${resetToken}`;
     const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
     try {
         await sendEmail({
@@ -185,21 +187,25 @@ exports.deactivate = catchAsync(async (req, res, next) => {
 
 exports.activate = catchAsync(async (req, res, next) => {
     const { email, password } = req.body;
-    if(!email || !password) {
+    if (!email || !password) {
         return next(new AppError('Please provide email and password', 400));
     }
-    const user = await User.findOneAndUpdate({ email }, { active: true }, { new: true }).select('+password');
-    if(!user || !(await user.correctPassword(password, user.password))) {
+    const user = await User.findOneAndUpdate(
+        { email },
+        { active: true },
+        { new: true }
+    ).select('+password');
+    if (!user || !(await user.correctPassword(password, user.password))) {
         await User.findOneAndUpdate({ email }, { active: false });
         return next(new AppError('Incorrect email or password'));
     }
     res.status(200).json({
         status: 'success',
-        message: 'Your account has been activated'
+        message: 'Your account has been activated',
     });
 });
 
 exports.logout = (req, res) => {
     res.clearCookie('jwt');
     res.status(205).end();
-}
+};

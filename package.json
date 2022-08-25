@@ -1,7 +1,7 @@
 {
-    "name": "rce",
+    "name": "nodejs-express-mongodb-boilerplate",
     "version": "1.0.0",
-    "description": "Code executioner",
+    "description": "A boilerplate for building a RESTful APIs using Node.js, Express, and Mongoose",
     "main": "src/index.js",
     "scripts": {
         "start": "ENV=prod node .",
