@@ -1,5 +1,14 @@
 # RESTful API Node Server Boilerplate
 
+## Table of Contents
+- [Installation](#installation)
+- [Features](#features)
+- [Commands](#commands)
+- [Project Structure](#project-structure)
+- [API Documentation](#api-documentation)
+- [Error Handling](#error-handling)
+- [Authorization](#authorization)
+
 ## Installation
 
 Clone the repo:
@@ -120,4 +129,3 @@ const { protect, restrictTo } = require('../controllers/authController');
 router.post('/some-route-you-want-to-give-access-only-to-admins-and-managers', protect, restrictTo('admin', 'manager'), someController);
 
 ```
-
